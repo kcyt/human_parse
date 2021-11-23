@@ -150,11 +150,37 @@ def main():
             upsample_output = upsample_output.permute(1, 2, 0)  # CHW -> HWC
 
             logits_result = transform_logits(upsample_output.data.cpu().numpy(), c, s, w, h, input_size=input_size)
-            parsing_result = np.argmax(logits_result, axis=2)
+            parsing_result = np.argmax(logits_result, axis=2) # shape of [H,W]
+
+            numpy_to_save = np.copy(parsing_result)
+            Part0_mask = numpy_to_save == 0
+            Part1_mask = numpy_to_save == 1
+            Part2_mask = numpy_to_save == 2
+            Part3_mask = numpy_to_save == 3
+            Part4_mask = numpy_to_save == 4
+            Part5_mask = numpy_to_save == 5
+            Part6_mask = numpy_to_save == 6
+
+            numpy_to_save[Part0_mask] = 0
+            numpy_to_save[Part1_mask] = 0.5
+            numpy_to_save[Part2_mask] = 0.6
+            numpy_to_save[Part3_mask] = 0.7
+            numpy_to_save[Part4_mask] = 0.8
+            numpy_to_save[Part5_mask] = 0.9
+            numpy_to_save[Part6_mask] = 1.0
+
+            numpy_result_path = os.path.join(args.output_dir, img_name + '.png')
+            numpy_to_save = numpy_to_save * 255.0 
+            numpy_to_save = numpy_to_save.astype(np.uint8)
+            numpy_to_save = Image.fromarray(numpy_to_save, 'L')
+            numpy_to_save.save(numpy_result_path)
+
+            """
             parsing_result_path = os.path.join(args.output_dir, img_name + '.png')
             output_img = Image.fromarray(np.asarray(parsing_result, dtype=np.uint8))
             output_img.putpalette(palette)
             output_img.save(parsing_result_path)
+            """
             if args.logits:
                 logits_result_path = os.path.join(args.output_dir, img_name + '.npy')
                 np.save(logits_result_path, logits_result)
