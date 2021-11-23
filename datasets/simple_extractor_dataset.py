@@ -30,18 +30,19 @@ class SimpleFolderDataset(data.Dataset):
         self.input_size = np.asarray(input_size)
 
         #self.training_subject_list = np.loadtxt("/mnt/lustre/kennard.chan/getTestSet/train_set_list.txt", dtype=str).tolist()
-        #self.training_subject_list = np.loadtxt("/content/drive/MyDrive/train_set_list.txt", dtype=str).tolist()  # for gdrive
+        self.training_subject_list = np.loadtxt("/content/drive/MyDrive/train_set_list.txt", dtype=str).tolist()  # for gdrive
 
 
         #self.training_subject_list = np.loadtxt("/mnt/lustre/kennard.chan/getTestSet/fake_train_set_list.txt", dtype=str).tolist()
-        self.training_subject_list = np.loadtxt("/content/drive/MyDrive/fake_train_set_list.txt", dtype=str).tolist()  # for gdrive
-        print("using fake training subject list!")
+        #self.training_subject_list = np.loadtxt("/content/drive/MyDrive/fake_train_set_list.txt", dtype=str).tolist()  # for gdrive
+        #print("using fake training subject list!")
 
         #self.test_subject_list = np.loadtxt("/mnt/lustre/kennard.chan/getTestSet/test_set_list.txt", dtype=str).tolist()
         self.test_subject_list = np.loadtxt("/content/drive/MyDrive/test_set_list.txt", dtype=str).tolist()
 
 
         self.subjects = self.training_subject_list # change to self.test_subject_list to get test subjects
+        #self.subjects = self.test_subject_list # change to self.test_subject_list to get test subjects
 
 
         self.file_list = []
