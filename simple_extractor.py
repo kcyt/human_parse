@@ -174,13 +174,13 @@ def main():
             numpy_result_path = os.path.join(args.output_dir, img_name + '.npy')
             np.save(numpy_result_path, numpy_to_save)
 
-            
+            """
             image_result_path = os.path.join(args.output_dir, img_name + '.png')
             image_to_save = numpy_to_save * 255.0 
             image_to_save = image_to_save.astype(np.uint8)
             image_to_save = Image.fromarray(image_to_save, 'L')
             image_to_save.save(image_result_path)
-            
+            """
 
             """
             parsing_result_path = os.path.join(args.output_dir, img_name + '.png')
