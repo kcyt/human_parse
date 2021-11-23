@@ -161,6 +161,8 @@ def main():
             Part5_mask = numpy_to_save == 5
             Part6_mask = numpy_to_save == 6
 
+            numpy_to_save = numpy_to_save.astype(np.float32)
+
             numpy_to_save[Part0_mask] = 0
             numpy_to_save[Part1_mask] = 0.5
             numpy_to_save[Part2_mask] = 0.6
